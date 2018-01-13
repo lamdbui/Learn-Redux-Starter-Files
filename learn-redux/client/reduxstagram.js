@@ -13,13 +13,19 @@ import PhotoGrid from './components/PhotoGrid';
 // Import react router deps
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
+// bindings that allow us to use Redux with React
+import { Provider } from 'react-redux';
+import store, { history } from './store';
+
 const router = (
-  <Router history={browserHistory}>
-    <Route path="/" component={Main}>
-    <IndexRoute component={PhotoGrid}></IndexRoute>
-    <Route path="/view/:postId"></Route>
-    </Route>
-  </Router>
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={Main}>
+      <IndexRoute component={PhotoGrid}></IndexRoute>
+      <Route path="/view/:postId"></Route>
+      </Route>
+    </Router>
+  </Provider>
 );
 
-render(<Main />, document.getElementById('root'));
+render(router, document.getElementById('root'));
