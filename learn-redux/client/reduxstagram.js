@@ -17,6 +17,29 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import store, { history } from './store';
 
+import Raven from 'raven-js';
+import { sentry_url, logException } from './data/config';
+
+Raven.config(sentry_url, {
+  tags: {
+    git_commit: 'something here',
+    userLevel: 'editor'
+  }
+}).install();
+
+// we can add our own custom exceptions
+// logException(new Error('download failed!'), {
+//   email: 'my@email.com'
+// });
+//
+// console.log(window.user.doesNotExist);
+//
+// do some Raven logging
+// Raven.captureMessage('Something bad happened');
+// 
+// display dialog to gather user feedback
+// Raven.showReportDialog();
+
 const router = (
   <Provider store={store}>
     <Router history={history}>
