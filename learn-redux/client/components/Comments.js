@@ -2,12 +2,14 @@ import React from 'react'
 
 const Comments = React.createClass({
   renderComment(comment, i) {
+    console.log('rendering comment:', i);
     return (
       <div className="comment" key={i}>
         <p>
           <strong>{comment.user}</strong>
           {comment.text}
-          <button className="remove-comment">&times;</button>
+          <button className="remove-comment"
+            onClick={this.props.removeComment.bind(null, this.props.params.postId, 2)}>&times;</button>
         </p>
       </div>
     )
